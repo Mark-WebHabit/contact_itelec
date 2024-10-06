@@ -1,0 +1,195 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+:root {
+  --blue: #005580;
+  --rice: #f6f8ed;
+  --shade: #e6e6e6;
+}
+
+* {
+  margin: 0%;
+  padding: 0%;
+  box-sizing: border-box;
+  transition: all 200ms;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  font-family: "Nunito", sans-serif;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  height: 100vh;
+  display: grid;
+  place-items: center;
+  background-color: var(--blue);
+}
+
+#container {
+  height: 90%;
+  aspect-ratio: 2 / 4;
+  border: 3px solid black;
+  outline: 2px solid white;
+  border-radius: 30px;
+  background: var(--rice);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.oval {
+  width: 6%;
+  aspect-ratio: 4/4;
+  margin: 0.6em auto;
+  border-radius: 100%;
+  background-color: black;
+}
+
+.footer {
+  width: 70px;
+  height: 16px;
+  margin: 0.7em auto;
+  background-color: black;
+  border-radius: 10px;
+}
+
+.content {
+  flex: 1;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+}
+.search-area {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0 1em;
+  margin-top: 0.2em;
+}
+
+.search-area i {
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.search-area .search {
+  flex: 1;
+}
+
+.search-area .search input {
+  width: 0%;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 0.4em 0;
+  padding-left: 10px;
+  display: none;
+}
+.search-area .search input:focus {
+  outline: none;
+}
+.form-group {
+  display: flex;
+  gap: 0.4em;
+  margin: 0.4em 0;
+}
+
+.form-group input {
+  font-size: 1.1rem;
+  width: 50%;
+  padding: 0.4em 0;
+  border: 1px solid var(--blue);
+  margin: 0;
+  padding-left: 0.4em;
+  border-radius: 5px;
+}
+.form-group input[name="address"] {
+  width: 100%;
+}
+.form-group input:focus {
+  border-color: transparent;
+  outline: 1px solid var(--blue);
+}
+
+#buttons {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.8em;
+}
+
+#buttons button {
+  width: 20%;
+  padding: 0.2em 0;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  color: white;
+  border: 1px solid;
+  background-color: var(--blue);
+}
+
+#buttons button:hover {
+  background-color: transparent;
+  color: var(--blue);
+}
+
+#form {
+  margin-top: 0.2em;
+  padding: 0.6em 0.6em;
+  border-bottom: 2px solid var(--blue);
+  overflow: hidden;
+  height: max-content;
+  display: none;
+}
+
+#add-icon {
+  font-size: 1.5rem;
+  color: white;
+  border: 1px solid;
+  background-color: var(--blue);
+  width: 30px;
+  text-align: center;
+}
+
+#add-icon:hover {
+  background: transparent;
+  color: var(--blue);
+}
+
+#contact-list {
+  flex: 1;
+  overflow-y: scroll;
+  padding: 0 1em;
+}
+
+.contact {
+  border-bottom: 2px solid var(--blue);
+  margin-top: 1em;
+  position: relative
+}
+
+.name {
+  line-height: 0.8rem;
+  font-size: 1.2rem;
+  text-transform: capitalize;
+}
+
+#name sup {
+  color: var(--blue);
+}
+.contact small{
+    font-weight: bold;
+    color: #564f4f;
+    font-size: 0.8rem;
+}
+.contact h3{
+    font-size: 2rem;
+}
+
+
+.empty{
+  text-align: center;
+  font-size: 2rem;
+  margin-top: 2em;
+}
