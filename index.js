@@ -42,6 +42,25 @@ $(() => {
   });
 
 
+  // Search functionality
+  $('#search-input').on('input', function () {
+    const searchTerm = $(this).val().toLowerCase();
+
+    // Filter contacts
+    $('.contact').each(function () {
+        const name = $(this).data('name').toLowerCase();
+        const contact = $(this).data('contact').toLowerCase();
+
+        // Show or hide based on match
+        if (name.includes(searchTerm) || contact.includes(searchTerm)) {
+            $(this).show();
+        } else {
+            $(this).hide();
+        }
+    });
+});
+
+
 });
 
 function hideForm() {

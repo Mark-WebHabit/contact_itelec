@@ -1,22 +1,20 @@
 <?php
+// Start the session to store the contacts array
+session_start();
 
-$contacts = array(
-    1 => array(
-        "fname" => "john",
-        "lname" => "doe",
-        "age" => 21,
-        "contact" => "09123786541",
-        "address" => "jan lang banda banda"
-    ),
-    2 => array(
-        "fname" => "jane",
-        "lname" => "doe ",
-        "age" => 22,
-        "contact" => "09123786541",
-        "address" => "sa tabi tabi"
-    )
-);
 
+
+// Initialize contacts from session or default contacts if session is empty
+if (isset($_SESSION['contacts'])) {
+    $contacts = $_SESSION['contacts'];
+} else {
+    // Initial contacts
+    $contacts = array(
+    
+    );
+}
+
+// Function to format the contact number with hyphens
 function formatContact($contactNumber)
 {
     $firstHypen = substr_replace($contactNumber, " - ", 4, 0);
@@ -24,14 +22,7 @@ function formatContact($contactNumber)
     return $secondHypen;
 }
 
-function validatePHPhoneNumber($phoneNumber)
-{
-    // Regular expression to match the pattern "09" followed by 9 digits
-    $pattern = '/^09\d{9}$/';
-    return preg_match($pattern, $phoneNumber);
-}
-
-// for form submission
+// Handle form submission to add new contact
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Get data from the form
     $fname = $_POST['fname'] ?? '';
@@ -40,23 +31,21 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $contact = $_POST['contact'] ?? '';
     $address = $_POST['address'] ?? '';
 
-    if (!validatePHPhoneNumber($contact)) {
-        echo "<script>alert('Invalid Phone Number')</script>";
-
-    } else {
-        // Add new contact to the array
-        $newContactId = count($contacts) + 1; // for the appended contact
-        $contacts[$newContactId] = array(
-            "fname" => $fname,
-            "lname" => $lname,
-            "age" => $age,
-            "contact" => $contact,
-            "address" => $address
-        );
-    }
+    // Add new contact to the contacts array
+    $newContactId = count($contacts) + 1; // Assign new ID
+    $contacts[$newContactId] = array(
+        "fname" => $fname,
+        "lname" => $lname,
+        "age" => $age,
+        "contact" => $contact,
+        "address" => $address
+    );
+    // Store the updated contacts array back in the session
+    $_SESSION['contacts'] = $contacts;
 }
-
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -109,29 +98,23 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             </form>
 
             <div id="contact-list">
-
-
-
                 <?php
-
                 if (empty($contacts)) {
                     echo "<h3 class='empty'>Contact Empty</h3>";
                 } else {
-
                     foreach ($contacts as $id => $item) {
                         echo "
-                        <div class='contact'>
-                        <p class='name'>" . htmlspecialchars($item["fname"]) . " " . htmlspecialchars($item["lname"]) . "<sup>" . htmlspecialchars($item["age"]) . "</sup> </p>
-                        <small>" . $item["address"] .  "</small>
+                        <div class='contact' data-name='" . htmlspecialchars($item["fname"] . " " . $item["lname"]) . "' data-contact='" . htmlspecialchars($item["contact"]) . "'>
+                        <p class='name'>" . htmlspecialchars($item["fname"]) . " " . htmlspecialchars($item["lname"]) . "<sup>" . htmlspecialchars($item["age"]) . "</sup></p>
+                        <small>" . htmlspecialchars($item["address"]) . "</small>
                         <h3>" . formatContact($item["contact"]) . "</h3>
                         </div>
                         ";
                     }
                 }
                 ?>
-
-
             </div>
+
 
 
 
